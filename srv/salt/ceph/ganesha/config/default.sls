@@ -6,7 +6,7 @@ prevent empty rendering:
   test.nop:
     - name: skip
 
-{% set nfs_pool = salt['deepsea.find_pool'](['cephfs', 'rgw']) %}
+{% set nfs_pool = salt['deepsea.find_pool'](['cephfs', 'rgw'], salt['pillar.get']('ganesha_preferred_pool', None)) %}
 
 {% for role in salt['pillar.get']('ganesha_configurations', [ 'ganesha' ]) %}
 check {{ role }}:

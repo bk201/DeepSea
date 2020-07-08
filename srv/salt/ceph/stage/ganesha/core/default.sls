@@ -48,6 +48,6 @@ configure dashboard nfs:
     - tgt: {{ master }}
     - tgt_type: compound
     - kwarg:
-        cmd: "POOL=`salt-call --out=json deepsea.find_pool '[\"cephfs\", \"rgw\"]' 2>/dev/null | jq -r .local` && ceph dashboard set-ganesha-clusters-rados-pool-namespace $POOL/ganesha"
+        cmd: "POOL=`salt-call --out=json deepsea.find_pool '[\"cephfs\", \"rgw\"]' {{ salt['pillar.get']('ganesha_preferred_pool') }} 2>/dev/null | jq -r .local` && ceph dashboard set-ganesha-clusters-rados-pool-namespace $POOL/ganesha"
 
 {% endif %}
